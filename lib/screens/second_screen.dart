@@ -10,8 +10,23 @@ class SecondScreen extends StatefulWidget {
   State<SecondScreen> createState() => _SecondScreenState();
 }
 
+
+
 class _SecondScreenState extends State<SecondScreen> {
   late final String userName;
+  String text = 'Selected User Name';
+
+  Future<void> awaitReturnValue(BuildContext buildContext) async {
+    final userSelectedName = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const ThirdScreen()
+        )
+    );
+    setState(() {
+      text = userSelectedName;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +77,7 @@ class _SecondScreenState extends State<SecondScreen> {
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(
-                        'Selected User Name',
+                        text,
                         style: nameTextStyle.copyWith(
                           fontWeight: bold
                         ),
@@ -82,13 +97,8 @@ class _SecondScreenState extends State<SecondScreen> {
           width: double.infinity,
           height: 56,
           child: TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ThirdScreen()
-                )
-              );
+            onPressed: ()  {
+             awaitReturnValue(context);
             },
             style: TextButton.styleFrom(
                 backgroundColor: purpleColor,
