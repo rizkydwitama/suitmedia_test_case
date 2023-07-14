@@ -28,7 +28,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(
-              vertical: 5
+              vertical: 10, horizontal: 10
             ),
             child: Container(
               width: double.infinity,
@@ -37,7 +37,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
                 horizontal: 20
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(15),
                 color: Colors.white
               ),
               child: Row(

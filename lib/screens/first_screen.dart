@@ -11,6 +11,12 @@ class FirstScreen extends StatefulWidget {
 
 class _FirstScreenState extends State<FirstScreen> {
 
+  TextEditingController palindromeInput = TextEditingController();
+
+  bool isPalindrome(String palindrome){
+    return palindrome == palindrome.split('').reversed.join();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +73,7 @@ class _FirstScreenState extends State<FirstScreen> {
                       ),
                       const SizedBox(height: 20,),
                       Text(
-                        'Palindrom',
+                        'Palindrome',
                         style: labelTextStyle,
                       ),
                       const SizedBox(height: 8,),
@@ -75,11 +81,12 @@ class _FirstScreenState extends State<FirstScreen> {
                         width: double.infinity,
                         height: 56,
                         child: TextFormField(
+                          controller: palindromeInput,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12)
                               ),
-                              hintText: 'Type palindrom here...',
+                              hintText: 'Type palindrome here...',
                               hintStyle: hintTextStyle,
                               contentPadding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 16
@@ -92,7 +99,34 @@ class _FirstScreenState extends State<FirstScreen> {
                         width: double.infinity,
                         height: 55,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            isPalindrome(palindromeInput.text)?
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text("True"),
+                                titleTextStyle: nameTextStyle,
+                                backgroundColor: Colors.greenAccent,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                content: Text("${palindromeInput.text.toString()} is Palindrome"),
+                              )
+                            )
+                                :
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text("False"),
+                                titleTextStyle: nameTextStyle,
+                                backgroundColor: Colors.redAccent,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                content: Text("${palindromeInput.text.toString()} is not Palindrome"),
+                              )
+                            );
+                          },
                           style: TextButton.styleFrom(
                             backgroundColor: purpleColor,
                             shape: RoundedRectangleBorder(
