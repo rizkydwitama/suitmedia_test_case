@@ -12,6 +12,7 @@ class FirstScreen extends StatefulWidget {
 class _FirstScreenState extends State<FirstScreen> {
 
   TextEditingController palindromeInput = TextEditingController();
+  TextEditingController nameInput = TextEditingController();
 
   bool isPalindrome(String palindrome){
     return palindrome == palindrome.split('').reversed.join();
@@ -59,6 +60,7 @@ class _FirstScreenState extends State<FirstScreen> {
                         width: double.infinity,
                         height: 56,
                         child: TextFormField(
+                          controller: nameInput,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12)
@@ -148,7 +150,9 @@ class _FirstScreenState extends State<FirstScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SecondScreen()
+                                  builder: (context) => SecondScreen(
+                                    userName: nameInput.text.toString(),
+                                  )
                               )
                             );
                           },

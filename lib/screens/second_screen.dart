@@ -3,13 +3,16 @@ import 'package:suitmedia_test_case/screens/third_screen.dart';
 import 'package:suitmedia_test_case/themes/theme.dart';
 
 class SecondScreen extends StatefulWidget {
-  const SecondScreen({Key? key}) : super(key: key);
+  final String userName;
+  const SecondScreen({Key? key, required this.userName}) : super(key: key);
 
   @override
   State<SecondScreen> createState() => _SecondScreenState();
 }
 
 class _SecondScreenState extends State<SecondScreen> {
+  late final String userName;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +53,7 @@ class _SecondScreenState extends State<SecondScreen> {
                   ),
                   const SizedBox(height: 5,),
                   Text(
-                      'I Kadek Rizky Dwitama Widiasa',
+                      widget.userName,
                       style: nameTextStyle.copyWith(
                         fontWeight: semiBold
                       )
